@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+html {
+  scroll-behavior: smooth;
+  /* GPU acceleration hints */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  /* Optimize font rendering */
+  text-rendering: optimizeSpeed;
+}
+
+/* GPU acceleration for common animated elements */
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+
+  /* Disable heavy effects on mobile */
+  .blur-effect {
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Simpler shadows on mobile */
+  .shadow-heavy {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+/* Firefox-specific optimizations */
+@-moz-document url-prefix() {
+  .blur-sphere {
+    display: none !important;
+  }
+
+  /* Disable backdrop-blur in Firefox (known performance issue) */
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg {
+    backdrop-filter: none !important;
+  }
+}
+
+/* Safari-specific optimizations */
+@supports (-webkit-touch-callout: none) {
+  .transform-gpu {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+}
+
+/* Optimize animations for all browsers */
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1s ease-in-out infinite;
+}
+
+/* Loader spinner - CSS only, no JS needed */
+.loader-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
